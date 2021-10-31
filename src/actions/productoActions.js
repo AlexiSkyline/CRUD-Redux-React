@@ -9,7 +9,7 @@ export function crearNuevoProductoAction( producto ) {
 
         try {
             dispatch( agregarProductoExito( producto ) );
-        } catch (error) {
+        } catch ( error ) {
             dispatch( agregarProductoError( true ) );
         }
     }
@@ -27,7 +27,8 @@ const agregarProductoExito = ( producto ) => ({
 });
 
 // * Si hubo un error
-const agregarProductoError = () => ({
-    type: AGREGAR_PRODUCTO_ERROR
+const agregarProductoError = ( estado ) => ({
+    type: AGREGAR_PRODUCTO_ERROR,
+    payload: estado
 });
 
