@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // * Action de Redux
 import { crearNuevoProductoAction } from '../actions/productoActions';
 
-export const NuevoProducto = () => {
+export const NuevoProducto = ({ history }) => {
     // * state del componentes
     const [ nombre, setNombre ] = useState('');
     const [ precio, setPrecio ] = useState(0);
@@ -34,6 +34,9 @@ export const NuevoProducto = () => {
             nombre,
             precio
         });
+
+        // TODO: redireccionamos
+        history.push( '/' );
     }
 
     return (
@@ -82,7 +85,7 @@ export const NuevoProducto = () => {
                         </form>
 
                         { cargando && <p>Cargando....</p>}
-                        
+
                         { error && <p className='alert alert-danger p2 mt-4 text-center'>Hubo un error</p> }
 
                     </div>
