@@ -1,7 +1,9 @@
 import { AGREGAR_PRODUCTO, 
          AGREGAR_PRODUCTO_ERROR, 
          AGREGAR_PRODUCTO_EXITO, 
-         COMENZAR_DESCARGA_PRODUCTOS
+         COMENZAR_DESCARGA_PRODUCTOS,
+         DESCARGA_PRODUCTOS_ERROR,
+         DESCARGA_PRODUCTOS_EXITO
         } from "../types";
     
 import { clienteAxios } from "../config/axios";
@@ -27,7 +29,6 @@ export function crearNuevoProductoAction( producto ) {
                 'success'
             );
         } catch ( error ) {
-            console.log( error );
             dispatch( agregarProductoError( true ) );
 
             // * Alerta error
@@ -62,10 +63,27 @@ const agregarProductoError = ( estado ) => ({
 export function obtenerProductosAction() {
     return async( dispatch ) => {
         dispatch( descargarProductos() );
+
+        try {
+            const respuesta = await clienteAxios.get( '/productos' );
+            dispatch( descargarProductosExitoso( respuesta.data ) );
+        } catch (error) {
+            dispatch( descargarProductosError() );
+        }
     }
 }
 
 const descargarProductos = () => ({
     type: COMENZAR_DESCARGA_PRODUCTOS,
+    payload: true
+});
+
+const descargarProductosExitoso = ( productos ) => ({
+    type: DESCARGA_PRODUCTOS_EXITO,
+    payload: productos
+});
+
+const descargarProductosError = () => ({
+    type: DESCARGA_PRODUCTOS_ERROR,
     payload: true
 });

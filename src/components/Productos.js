@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { obtenerProductosAction } from '../actions/productoActions';
+import { Producto } from './Producto';
 
 export const Productos = () => {
 
@@ -12,8 +13,11 @@ export const Productos = () => {
         // * Consulta la API
         const cargarProductos = () => dispatch( obtenerProductosAction() );
         cargarProductos();
-        
+
     }, [] );
+
+    // * Obtener el state
+    const productos = useSelector( state => state.productos.productos );
 
     return (
         <>
@@ -28,7 +32,16 @@ export const Productos = () => {
                     </tr>
                 </thead>
                 <tbody>
-
+                    {
+                        productos.length === 0 ? 'No hay productos' : (
+                            productos.map( producto => (
+                                <Producto
+                                    key={ producto.id }
+                                    producto={ producto } 
+                                />
+                            ))
+                        )
+                    }
                 </tbody>
             </table>
         </>
