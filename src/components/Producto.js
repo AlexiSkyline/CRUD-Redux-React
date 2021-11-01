@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { eliminarProductoAction } from '../actions/productoActions';
+import Swal from 'sweetalert2';
 
 export const Producto = ({ producto }) => {
 
@@ -13,9 +14,22 @@ export const Producto = ({ producto }) => {
     const handlerClickEliminar = ( id ) => {
 
         // TODO: Preguntar al usuario
-        
-        // TODO: pasarlo al action
-        dispacth( eliminarProductoAction( id ) );
+        Swal.fire({
+            title: '¿Estas Seguro?',
+            text: 'El producto se eliminara',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then(( result ) => {
+            if( result.value ) {
+                // TODO: pasarlo al action
+                dispacth( eliminarProductoAction( id ) );
+            }
+        });
+
     }
 
     return (
