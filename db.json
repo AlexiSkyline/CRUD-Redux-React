@@ -34,6 +34,11 @@
       "nombre": "Jugo tutifruti",
       "precio": 300,
       "id": 7
+    },
+    {
+      "nombre": "Mango fruta",
+      "precio": 300,
+      "id": 8
     }
   ]
 }

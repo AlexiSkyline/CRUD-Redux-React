@@ -1,6 +1,8 @@
 import { AGREGAR_PRODUCTO, 
          AGREGAR_PRODUCTO_ERROR, 
-         AGREGAR_PRODUCTO_EXITO } from "../types";
+         AGREGAR_PRODUCTO_EXITO, 
+         COMENZAR_DESCARGA_PRODUCTOS
+        } from "../types";
     
 import { clienteAxios } from "../config/axios";
 
@@ -55,3 +57,15 @@ const agregarProductoError = ( estado ) => ({
     payload: estado
 });
 
+
+// TODO: Función que descarga los productos de la base de datos
+export function obtenerProductosAction() {
+    return async( dispatch ) => {
+        dispatch( descargarProductos() );
+    }
+}
+
+const descargarProductos = () => ({
+    type: COMENZAR_DESCARGA_PRODUCTOS,
+    payload: true
+});
