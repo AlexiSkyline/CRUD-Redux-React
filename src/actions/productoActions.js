@@ -4,6 +4,7 @@ import { AGREGAR_PRODUCTO,
          COMENZAR_DESCARGA_PRODUCTOS,
          DESCARGA_PRODUCTOS_ERROR,
          DESCARGA_PRODUCTOS_EXITO,
+         OBTENER_PRODUCTO_EDITAR,
          OBTENER_PRODUCTO_ELIMINAR,
          PRODUCTO_ELIMINADO_ERROR,
          PRODUCTO_ELIMINADO_EXITOSO
@@ -124,4 +125,16 @@ const eliminarProductoExito = () => ({
 const eliminarProductoError = () => ({
     type: PRODUCTO_ELIMINADO_ERROR,
     payload: true
+});
+
+// TODO: Almacena el producto para la edición
+export function obtenerProductoEditar( producto ) {
+    return ( dispatch ) => {
+        dispatch( obtenerProductoEditarAction( producto ) );
+    }
+}
+
+const obtenerProductoEditarAction = ( producto ) => ({
+    type: OBTENER_PRODUCTO_EDITAR,
+    payload: producto
 });

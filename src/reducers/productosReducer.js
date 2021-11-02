@@ -4,6 +4,7 @@ import { AGREGAR_PRODUCTO,
          COMENZAR_DESCARGA_PRODUCTOS,
          DESCARGA_PRODUCTOS_ERROR,
          DESCARGA_PRODUCTOS_EXITO,
+         OBTENER_PRODUCTO_EDITAR,
          OBTENER_PRODUCTO_ELIMINAR,
          PRODUCTO_ELIMINADO_ERROR,
          PRODUCTO_ELIMINADO_EXITOSO
@@ -14,7 +15,8 @@ const initialState = {
     productos: [],
     error: null,
     loading: false,
-    productoEliminar: null
+    productoEliminar: null,
+    productoEditar: null
 }
 
 export const productosReducer = ( state = initialState, action ) => {
@@ -56,6 +58,11 @@ export const productosReducer = ( state = initialState, action ) => {
                 ...state,
                 productos: state.productos.filter( producto => producto.id !== state.productoEliminar ),
                 productoEliminar: null
+            }
+        case OBTENER_PRODUCTO_EDITAR:
+            return {
+                ...state,
+                productoEditar: action.payload
             }
         default:
             return state;
