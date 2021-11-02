@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { editarProductoAction } from '../actions/productoActions';
 
 export const EditarProducto = () => {
 
-    // * Producto a editar
-    const producto = useSelector( state => state.productos.productoEditar );
+    const history = useHistory();
+    const dispatch = useDispatch();
 
+    // * nuevo State del producto a editar
+    const [ producto, setProductoEditar ] = useState({
+        nombre: '',
+        precio: ''
+    });
+
+    // * Producto a editar
+    const productoEditar = useSelector( state => state.productos.productoEditar );
     
-    if( !producto ) return;
-    const { nombre, precio, id } = producto;
+    // * llena el state automaticamente
+    useEffect(() => {
+        setProductoEditar( productoEditar );
+    }, [productoEditar]);
+
+    // TODO: Leer los datos del formulario
+    const handlerOnChange = ( e ) => {
+        setProductoEditar({
+            ...producto,
+            [ e.target.name ]: e.target.value
+        });
+    }
+
+    const { nombre, precio } = producto;
 
     const handlerOnSubmitEditar = ( e ) => {
         e.preventDefault();
 
+        dispatch( editarProductoAction( producto ) );
         
+        history.push( '/' );
     }
 
     return (
@@ -39,6 +62,7 @@ export const EditarProducto = () => {
                                 placeholder='Nombre Producto'
                                 name='nombre'
                                 value={ nombre }
+                                onChange={ handlerOnChange }
                             />
                         </div>
 
@@ -50,6 +74,7 @@ export const EditarProducto = () => {
                                 placeholder='Precio del Producto'
                                 name='precio'
                                 value={ precio }
+                                onChange={ handlerOnChange }
                             />
                         </div>
 

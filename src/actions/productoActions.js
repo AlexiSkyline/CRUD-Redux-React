@@ -7,6 +7,8 @@ import { AGREGAR_PRODUCTO,
          DESCARGA_PRODUCTOS_EXITO,
          OBTENER_PRODUCTO_EDITAR,
          OBTENER_PRODUCTO_ELIMINAR,
+         PRODUCTO_EDITAR_ERROR,
+         PRODUCTO_EDITAR_EXITOSO,
          PRODUCTO_ELIMINADO_ERROR,
          PRODUCTO_ELIMINADO_EXITOSO
         } from "../types";
@@ -143,17 +145,25 @@ const obtenerProductoEditarAction = ( producto ) => ({
 // TODO: Fincion para Editar el producto y mansarla a la API y al state
 export function editarProductoAction( producto ) {
     return async ( dispatch ) => {
-        dispatch( editarProducto( producto ) );
-
+        dispatch( editarProducto() );
         try {
             await clienteAxios.put( `/productos/${ producto.id }`, producto );
+            dispatch( editarProductoExitoso( producto ) );
         } catch (error) {
-            
+            dispatch( editarProductoError() );
         }
     }
 }
 
-const editarProducto = ( producto ) => ({
+const editarProducto = () => ({
     type: COMENZAR_EDICION_PRODUCTO,
+});
+
+const editarProductoExitoso = ( producto ) => ({
+    type: PRODUCTO_EDITAR_EXITOSO,
     payload: producto
+});
+
+const editarProductoError = () => ({
+    type: PRODUCTO_EDITAR_ERROR,
 });
