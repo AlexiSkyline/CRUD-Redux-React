@@ -1,4 +1,4 @@
-import { MOSTRAR_ALERTA } from "../types";
+import { MOSTRAR_ALERTA, OCULTAR_ALERTA } from "../types";
 
 
 const initialState = {
@@ -11,6 +11,11 @@ export const alertaReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 alerta: action.payload
+            }
+        case OCULTAR_ALERTA:
+            return {
+                ...state,
+                alerta: null
             }
         default: 
             return state;

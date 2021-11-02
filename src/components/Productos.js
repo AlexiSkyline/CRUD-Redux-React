@@ -14,6 +14,7 @@ export const Productos = () => {
         const cargarProductos = () => dispatch( obtenerProductosAction() );
         cargarProductos();
 
+         //eslint-disable-next-line
     }, [] );
 
     // * Obtener el state

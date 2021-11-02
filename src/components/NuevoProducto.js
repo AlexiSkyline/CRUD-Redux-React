@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { mostarAlertaAction } from '../actions/alertaActions';
+import { mostarAlertaAction, ocultarAlertaAction } from '../actions/alertaActions';
 
 // * Action de Redux
 import { crearNuevoProductoAction } from '../actions/productoActions';
@@ -33,10 +33,13 @@ export const NuevoProducto = ({ history }) => {
             }
 
             dispatch( mostarAlertaAction( alerta ) );
+            setTimeout(() => dispatch( ocultarAlertaAction() ), 3000 );
 
             return;
         }
+
         // * Si no hay errores
+        dispatch( ocultarAlertaAction() );
 
         // * Crea el nuevo producto
         agregarProducto({ 

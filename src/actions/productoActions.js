@@ -167,4 +167,5 @@ const editarProductoExitoso = ( producto ) => ({
 
 const editarProductoError = () => ({
     type: PRODUCTO_EDITAR_ERROR,
+    payload: true
 });
