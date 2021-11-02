@@ -2,6 +2,7 @@ import { AGREGAR_PRODUCTO,
          AGREGAR_PRODUCTO_ERROR, 
          AGREGAR_PRODUCTO_EXITO, 
          COMENZAR_DESCARGA_PRODUCTOS,
+         COMENZAR_EDICION_PRODUCTO,
          DESCARGA_PRODUCTOS_ERROR,
          DESCARGA_PRODUCTOS_EXITO,
          OBTENER_PRODUCTO_EDITAR,
@@ -136,5 +137,23 @@ export function obtenerProductoEditar( producto ) {
 
 const obtenerProductoEditarAction = ( producto ) => ({
     type: OBTENER_PRODUCTO_EDITAR,
+    payload: producto
+});
+
+// TODO: Fincion para Editar el producto y mansarla a la API y al state
+export function editarProductoAction( producto ) {
+    return async ( dispatch ) => {
+        dispatch( editarProducto( producto ) );
+
+        try {
+            await clienteAxios.put( `/productos/${ producto.id }`, producto );
+        } catch (error) {
+            
+        }
+    }
+}
+
+const editarProducto = ( producto ) => ({
+    type: COMENZAR_EDICION_PRODUCTO,
     payload: producto
 });
