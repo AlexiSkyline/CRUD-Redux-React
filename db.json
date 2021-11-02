@@ -11,24 +11,19 @@
       "id": 3
     },
     {
-      "nombre": "Rib Eye 800g",
-      "precio": "200",
+      "nombre": "Rib Eye 1Kg",
+      "precio": "120",
       "id": 4
     },
     {
-      "nombre": "Jugo de Fresa",
-      "precio": "200",
-      "id": 5
-    },
-    {
-      "nombre": "Jugo tutifruti",
-      "precio": 300,
-      "id": 7
-    },
-    {
       "nombre": "Mango fruta",
-      "precio": 300,
+      "precio": "20",
       "id": 8
+    },
+    {
+      "nombre": "mescal",
+      "precio": "100",
+      "id": 9
     }
   ]
 }
